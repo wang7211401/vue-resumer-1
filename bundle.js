@@ -67,19 +67,7 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = bar;
-function bar() {}
-
-/***/ }),
+/* 0 */,
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10181,9 +10169,9 @@ module.exports = Vue$3;
 "use strict";
 
 
-var _bar = __webpack_require__(0);
+var _stringify = __webpack_require__(5);
 
-var _bar2 = _interopRequireDefault(_bar);
+var _stringify2 = _interopRequireDefault(_stringify);
 
 var _vue = __webpack_require__(1);
 
@@ -10194,7 +10182,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var app = new _vue2.default({
   el: '#app',
   data: {
-    message: 'Hello Vue!'
+    newTodo: '',
+    todoList: []
+  },
+  created: function created() {
+    var _this = this;
+
+    window.onbeforeunload = function () {
+      var dataString = (0, _stringify2.default)(_this.todoList);
+      window.localStorage.setItem('myTodos', dataString);
+    };
+    var oldDataString = window.localStorage.getItem('myTodos');
+    var oldData = JSON.parse(oldDataString);
+    this.todoList = oldData || [];
+  },
+  methods: {
+    addTodo: function addTodo() {
+      this.todoList.push({
+        title: this.newTodo,
+        createdAt: new Date(),
+        done: false
+      });
+      this.newTodo = '';
+    },
+    removeTodo: function removeTodo(todo) {
+      var index = this.todoList.indexOf(todo);
+      this.todoList.splice(index, 1);
+    }
   }
 });
 
@@ -10413,6 +10427,31 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__(6), __esModule: true };
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var core = __webpack_require__(7);
+var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
+module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
+  return $JSON.stringify.apply($JSON, arguments);
+};
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+var core = module.exports = { version: '2.5.1' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
 /***/ })
