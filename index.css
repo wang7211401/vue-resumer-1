@@ -3,6 +3,9 @@
   margin:0;
   padding:0;
 }
+ol,ul{
+  list-style: none;
+}
 body{
   display: flex;
   justify-content: center;
@@ -19,22 +22,28 @@ body{
   height:100%;
   background: transparent url(https://i.loli.net/2017/09/21/59c33cfa62ee1.jpg) center no-repeat;
   background-size: cover;
-  filter: blur(3px) brightness(0.8);
+  filter: blur(3px) brightness(0.6);
 }
 #app{
   position:relative;
-  max-width:600px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app #signInAndSignUp{
+  padding:30px;
+  width:460px;
   background:rgba(255,255,255,0.8);
   box-shadow:0 0 5px #646464;
   border-radius:5px;
 }
-#app #signInAndSignUp{
-  padding:30px;
-}
 #app #signInAndSignUp .app-login{
+  position:relative;
   width: 100%;
-  font-size:30px;
-  border-bottom: 1px solid ;
+  font-size:26px;
+  border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
@@ -48,5 +57,125 @@ body{
   display:none;
 }
 #app #signInAndSignUp .app-login .line{
-  
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:50%;
+  border-bottom:1px solid #51B0A3;
+  transition:all .3s;
 }
+#app #signInAndSignUp .app-login .line.active{
+  left:50%;
+}
+#app #signInAndSignUp .app-login .line s{
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%);
+  border-top: 10px solid #51B0A3;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.signUp,.login{
+  font-size:20px;
+}
+.signUp .formRow,.login .formRow{
+  margin:10px;
+}
+.signUp .formRow input,.login .formRow input{
+  width:310px;
+  height:45px;
+  font-size:16px;
+  background:none;
+  border-radius:5px;
+  border:1px solid #cccccc;
+  outline:none;
+}
+.signUp .formRow input:focus,.login .formRow input:focus{
+  border:1px solid #51B0A3;
+  background: #fff;
+}
+.signUp .formActions,.login .formActions{
+  text-align:center;
+}
+.signUp .formActions input,.login .formActions input{
+  width: 200px;
+  height: 50px;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 20px;
+  margin-top:10px;
+}
+.signUp .formActions input:hover,.login .formActions input:hover{
+  background: #51B0A3;
+}
+#todo{
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translate(-50%);
+  width: 460px;
+  font-size: 20px;
+  color: #EDFAF5;
+}
+#todo .todo-user{
+  display:flex;
+  margin-top:20px;
+}
+#todo .todo-user .username{
+  flex-grow:1;
+}
+#todo .todo-user p button{
+  color:#EDFAF5;
+  font-size:20px;
+  padding:0 10px;
+  background:#51B0A3;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  margin-right:10px;
+}
+#todo .todo-user p button:hover{
+  background: #fff;
+  color:#51B0A3;
+}
+#todo .newTask{
+  margin:10px 0;
+}
+#todo .newTask input{
+  width: 460px;
+  height: 50px;
+  border-radius:5px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 20px;
+  margin-top:10px;
+  padding:0 10px;
+}
+#todo .todos{
+  font-size:20px;
+  color:#EDFAF5;
+  max-height: 500px;
+  overflow: auto;
+}
+#todo .todos li{
+  margin:10px;
+}
+#todo .todos li input[type="checkbox"]{
+  width: 25px;
+  height: 25px;
+  vertical-align: bottom;
+}
+#todo .todos li button{
+  border: none;
+  outline: none;
+  background: none;
+}
+#todo .todos li button .remove{
+  width:20px;
+  height:20px;
+  background: #EDFAF5;
+  vertical-align: bottom;
+}
+

@@ -73,6 +73,7 @@ var app = new Vue({
       }
     },
     addTodo:function(){
+      if(!this.newTodo){alert('请输入代办事项名称'); return false}
       this.todoList.push({
         id:todo.id,
         title:this.newTodo,

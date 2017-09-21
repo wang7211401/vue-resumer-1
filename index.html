@@ -2,8 +2,6 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>todolist</title>
     <link rel="stylesheet" href="index.css">
   </head>
@@ -14,12 +12,12 @@
         <div class="app-login">
           <label><input type="radio" name="type" v-model="actionType" value="signUp">注册</label>
           <label><input type="radio" name="type" v-model="actionType" value="login">登录</label>
-          <span class="line" :class="{ active: actionType }"><s></s></span>
+          <span class="line" :class="{ active: actionType === 'login'}"><s></s></span>
         </div>
         <div class="signUp" v-if="actionType === 'signUp'">
           <form @submit.prevent="signUp">
             <div class="formRow">
-              用户名：<input type="text" v-model="formData.username" placeholder="请输入用户名">
+              账号：<input type="text" v-model="formData.username" placeholder="请输入账号">
             </div>
             <div class="formRow">
               密码：<input type="password" v-model="formData.password" placeholder="请输入密码">
@@ -32,33 +30,40 @@
         <div class="login" v-if="actionType === 'login'">
           <form @submit.prevent="login">
             <div class="formRow">
-              用户名：<input type="text" v-model="formData.username" placeholder="请输入用户名">
+              账号：<input type="text" v-model="formData.username" placeholder="请输入账号">
             </div>
             <div class="formRow">
               密码：<input type="password" v-model="formData.password" placeholder="请输入密码">
             </div>
             <div class="formActions">
-              <input type="submit" value="登入">
+              <input type="submit" value="登录">
             </div>
           </form>
         </div>
       </section>
       <section id="todo" v-if="currentUser">
-        <p><button @click="logout">退出</button></p>
+        <div class="todo-user">
+          <p class="username">你好，{{currentUser.username}}</p>
+          <p><button @click="logout">退出</button></p>
+        </div>
         <div class="newTask">
-          <input type="text" v-model="newTodo" @keypress.enter="addTodo">
+          <input type="text" v-model="newTodo" @keypress.enter="addTodo" placeholder="请输入代办事项名称">
         </div>
         <ol class="todos">
           <li v-for="todo in todoList">
             <input type="checkbox" v-model="todo.done"> {{todo.title}}
             <span v-if="todo.done">已完成</span>
             <span v-else>未完成</span>
-            <button @click="removeTodo(todo)" v-if="todo.done">x</button>
+            <button @click="removeTodo(todo)" v-if="todo.done">
+              <svg class="remove">
+                <use xlink:href="#icon-shanchu"></use>
+              </svg>
+            </button>
           </li>
         </ol>
       </section>
     </div>
-
+    <script src="//at.alicdn.com/t/font_423822_son83brrkmpctyb9.js"></script>
     <script src="bundle.js"></script>
   </body>
 </html>

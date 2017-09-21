@@ -10481,6 +10481,9 @@ var app = new _vue2.default({
       }
     },
     addTodo: function addTodo() {
+      if (!this.newTodo) {
+        alert('请输入代办事项名称');return false;
+      }
       this.todoList.push({
         id: todo.id,
         title: this.newTodo,
